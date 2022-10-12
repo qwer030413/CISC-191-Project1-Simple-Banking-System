@@ -20,13 +20,16 @@ public class SimpleBank extends Account
     public void run()
     {
     	boolean quit = false;
+    	String command;
     	System.out.println("Starting simple bank...");
     	
     	do
     	{
+    		
     		System.out.println("");
     		System.out.print("Enter command(press h for help): ");
-    		String command = cmd.nextLine();
+    		command = cmd.nextLine();
+    		
     		System.out.println("command recieved: " + command);
     		System.out.println("");
     		if(command .compareTo("h") == 0)
@@ -45,7 +48,7 @@ public class SimpleBank extends Account
     		}
     		else if(command.compareTo("n") == 0)
     		{
-    			System.out.println("Creating new account..");
+    			System.out.println("Creating new account.."); 
     			System.out.print("Enter name for account: ");
     			String name = cmd.nextLine();
     			createAcc(name);
@@ -53,18 +56,36 @@ public class SimpleBank extends Account
 
             else if(command.compareTo("d") == 0)
             {
+            	int amount = 0;
                 System.out.print("Name of account: ");
                 String name = cmd.nextLine();
                 System.out.print("Deposit Amount: ");
-                int amount = cmd.nextInt();
+                try {
+                amount = Integer.parseInt(cmd.nextLine().trim());
+                }
+                catch (Exception NumberFormatException)
+                {
+                	System.out.println("Invalid Deposit amount, deposit failed.");
+                	System.out.println("Please enter a valid amount next time :)");
+                }
                 deposit(name,amount);
+
+               
             }
             else if(command.compareTo("w") == 0)
             {
+            	int amount = 0;
             	System.out.print("Name of account: ");
                 String name = cmd.nextLine();
                 System.out.print("Withdraw Amount: ");
-                int amount = cmd.nextInt();
+                try {
+                    amount = Integer.parseInt(cmd.nextLine().trim());
+                    }
+                    catch (Exception NumberFormatException)
+                    {
+                    	System.out.println("Invalid Deposit amount, deposit failed.");
+                    	System.out.println("Please enter a valid amount next time :)");
+                    }
                 withdraw(name,amount);
             }
 
@@ -73,7 +94,7 @@ public class SimpleBank extends Account
                 for(int i = 0; i < accountList.size(); i++)
                 {
                 	System.out.println("Name: " + getName(i) + ", Balance: " + getBalance(i) + ", Account Number: " + getAccountNum(i));   //Format 
-                }
+                } 
             }
             else if (command.compareTo("t") == 0)
             {
@@ -81,6 +102,17 @@ public class SimpleBank extends Account
                 String name = cmd.nextLine();
                 System.out.println(checkName(name));
 
+            }
+            else if(command.compareTo("i") == 0)
+            {
+            	System.out.print("Account Name:");
+            	String name = cmd.nextLine();
+            	accountInfo(name);
+            	
+            }
+            else 
+            {
+            	System.out.println("Command not recognized, try again!");
             }
     	}while(quit != true);
     }
