@@ -1,22 +1,23 @@
+
+import java.io.IOException;
 import java.util.ArrayList; // import the ArrayList class
 import java.util.Scanner;
 /*
- * improvements: only chris and josh can see all the accounts
+ * improvements: only chris and josh can see all the accounts - done
  * exception for negative balance	-done
  * exception for negatve deposit amount		-done
  * exception for invalid account number		-done
  * do the file I/O
- * make it so input doesn't matter if its lower or upper case
  * fix the bug thing in deposit and withdraw - done!
  * Change int to different data type like double
- * add dollar signs
+ * add dollar signs	-- done!
  * format the a command
  * 
  */
 public class Account
 {
 	private String name;
-	private int balance;            //Change to double with two decimals
+	private double balance;            //Change to double with two decimals
 	private int accountNum = 0;
 	static int nextAccountNum = 0;
     ArrayList<Account> accountList = new ArrayList<Account>();
@@ -35,9 +36,9 @@ public class Account
 		return accountList.get(index).name;
 	}
 	
-    public int getBalance(int index)
+    public double getBalance(int index)
     {
-        return accountList.get(index).balance;
+        return Math.round(accountList.get(index).balance);
     }
     public int getAccountNum(int index)
     {
@@ -49,7 +50,6 @@ public class Account
     }
     public void deposit(String name, int amount)
     {
-        // Add way to deal with negative deposit
     	if(checkName(name) > 1)
     	{
     		System.out.println("There are more than one accounts with that name");
@@ -59,6 +59,7 @@ public class Account
     		{
     			if(accountList.get(num - 1).name.compareTo(name) == 0)
     			{
+    				
                     accountList.get(num - 1).balance += amount;
 
     			}
@@ -78,21 +79,22 @@ public class Account
     	{
     		System.out.println("There are no accounts with that name, try a different account name");
     	}
-    	else if(amount <= 0)
+    	else if(amount < 0)
     	{
     		System.out.println("Amount should be greater than 0!");
     	}
     	
     	else
         {
-            accountList.get(getIndex(name)).balance -= amount;
+
+            accountList.get(getIndex(name)).balance += amount;
 
         }
     }
-    public void withdraw(String name, int amount)
+    public void withdraw(String name, int amount) 
     {
         // add way to deal with negative withdraw
-    	if(checkName(name) > 1)
+    	if(checkName(name) > 1)													//if there is more than 1 account with the name "name"
     	{
     		System.out.println("There are more than one accounts with that name");
     		System.out.print("Enter your Account Number: ");   
@@ -101,7 +103,7 @@ public class Account
     		{
     			if(accountList.get(num - 1).name.compareTo(name) == 0)
     			{
-                    accountList.get(num - 1).balance += amount;
+                    accountList.get(num - 1).balance -= amount;
 
     			}
     			else 
@@ -116,18 +118,18 @@ public class Account
     		}
         }        
     	
-    	else if(checkName(name) == 0)
+    	else if(checkName(name) == 0)	//there is no name at all
     	{
     		System.out.println("There are no accounts with that name, try a different account name");
     	}
-    	else if(amount > balance)
+    	else if(amount >  accountList.get(getIndex(name)).balance)
     	{
     		System.out.println("You dont have enough money");
     	}
     	
     	else
         {
-            accountList.get(getIndex(name)).balance += amount;
+            accountList.get(getIndex(name)).balance -= amount;
         }
     }
     
@@ -156,7 +158,7 @@ public class Account
     		System.out.println("There are more than one accounts with that name");
     		System.out.print("Enter your Account Number: ");   
     		num = cmd.nextInt();
-            System.out.println("Name: " + accountList.get(num - 1).name + " Balance: " + accountList.get(num - 1).balance + " Account Numner: " + accountList.get(num - 1).accountNum);
+            System.out.println("Name: " + accountList.get(num - 1).name + " Balance: " + accountList.get(num - 1).balance + "$ " + " Account Numner: " + accountList.get(num - 1).accountNum);
         }
     	
     	else if(checkName(name) == 0)
@@ -166,7 +168,7 @@ public class Account
     	else
     	{
     		
-            System.out.println("Name: " + accountList.get(getIndex(name)).name + " Balance: " + accountList.get(getIndex(name)).balance + " Account Numner: " + accountList.get(getIndex(name)).accountNum);
+            System.out.println("Name: " + accountList.get(getIndex(name)).name + " Balance: " + accountList.get(getIndex(name)).balance + "$ " + " Account Numner: " + accountList.get(getIndex(name)).accountNum);
 
     	}
     	
