@@ -2,16 +2,19 @@
 import java.io.IOException;
 import java.util.ArrayList; // import the ArrayList class
 import java.util.Scanner;
-/*
- * improvements: only chris and josh can see all the accounts - done
- * exception for negative balance	-done
- * exception for negatve deposit amount		-done
- * exception for invalid account number		-done
- * do the file I/O
- * fix the bug thing in deposit and withdraw - done!
- * Change int to different data type like double
- * add dollar signs	-- done!
- * format the a command
+/**
+ * Lead Author(s):
+ * @author Joshua Edralin
+ * @author Chris Park
+ * <<add additional lead authors here, with a full first and last name>>
+ * 
+ * 
+ * References: just a normal banking system
+ * 
+ *  
+ * Version/date: 10/21/2022
+ * 
+ * Responsibilities of class: To create a project that uses all the materials we covered in modules 1~6
  * 
  */
 public class Account
@@ -20,7 +23,7 @@ public class Account
 	private double balance;            //Change to double with two decimals
 	private int accountNum = 0;
 	static int nextAccountNum = 0;
-    ArrayList<Account> accountList = new ArrayList<Account>();
+    private ArrayList<Account> accountList = new ArrayList<Account>();
     Scanner cmd = new Scanner(System.in);
 
 
@@ -55,6 +58,14 @@ public class Account
     public double getBalance(int index)
     {
         return Math.round(accountList.get(index).balance);
+    }
+    /**
+	 * Purpose: To get the size of the accountList which is the number of existing accounts
+	 * @return The size of the accountList
+	 */
+    public int getSize()
+    {
+    	return accountList.size();
     }
     /**
 	 * Purpose: to get an account number in the given index in the array list
@@ -190,7 +201,7 @@ public class Account
     
     
     /**
-   	 * Purpose: method to check how many accounts there are with the given name
+   	 * Purpose: helper method to check how many accounts there are with the given name
    	 * @param name for the account name to test
    	 * @return number of accounts with the given name
    	 * 
@@ -213,22 +224,30 @@ public class Account
         return nameCount;
     }
     
-    //
+    /**
+   	 * Purpose: method to return the information of the account with the given name
+   	 * @param name for the account name to get info from
+   	 * 
+   	 * 
+   	 */
     public void accountInfo(String name)
     {
     	int num = 0;
-    	if(checkName(name) > 1)
+    	//if there are more than 1 accounts with the given name
+    	//ask for their account number so we know which one it is
+    	if(checkName(name) > 1)						
     	{
     		System.out.println("There are more than one accounts with that name");
     		System.out.print("Enter your Account Number: ");   
     		num = cmd.nextInt();
-            System.out.println("Name: " + accountList.get(num - 1).name + " Balance: " + accountList.get(num - 1).balance + "$ " + " Account Numner: " + accountList.get(num - 1).accountNum);
+            System.out.println("Name: " + accountList.get(num - 1).name + " Balance: " + "$" + accountList.get(num - 1).balance +  " Account Numner: " + accountList.get(num - 1).accountNum);
         }
-    	
+    	//if there are no accounts with the given name, print out error message
     	else if(checkName(name) == 0)
     	{
     		System.out.println("There are no accounts with that name, try a different account name");
     	}
+    	//if there is one account with the given account name, print out the info of the account
     	else
     	{
     		
@@ -237,6 +256,13 @@ public class Account
     	}
     	
     }
+    
+    /**
+   	 * Purpose: helper method to get the index of the account of the given account name
+   	 * @param name for the account name to search
+   	 * @return the index of the account with the given name
+   	 * 
+   	 */
     public int getIndex(String name)
     {
     	for(int i = 0; i < accountList.size(); i++)
