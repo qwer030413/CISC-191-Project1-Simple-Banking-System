@@ -1,1 +1,3 @@
-Name: chris, Balance: 0.0$ , Account Number: 1
+Name: chris, Balance: $0.0, Account Number: 1
+Name: chris, Balance: $0.0, Account Number: 2
+Name: josh, Balance: $1000.0, Account Number: 3

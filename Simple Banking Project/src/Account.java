@@ -100,11 +100,12 @@ public class Account
     	{
     		System.out.println("There are more than one accounts with that name");
     		System.out.print("Enter your Account Number: ");   
-    		int num = cmd.nextInt();
+    		
     		//use try, catch to catch the IndexOutOfBoundsException error just incase the person does not enter a int variable
         	//for the account number    	
     		try 
     		{
+    			int num = cmd.nextInt();
     	    	//make sure the account number exists and print error message otherwise
     			if(accountList.get(num - 1).name.compareTo(name) == 0)
     			{
@@ -118,9 +119,9 @@ public class Account
     			}
 
     		}
-    		catch(Exception IndexOutOfBoundsException)
+    		catch(Exception IndexOutOfBounds)
     		{
-    			System.out.println("Invalid account numer");
+    			System.out.println("Invalid account number");
     		}
         }
     	
@@ -159,11 +160,12 @@ public class Account
     	{
     		System.out.println("There are more than one accounts with that name");
     		System.out.print("Enter your Account Number: ");   
-    		int num = cmd.nextInt();
+    		
     		//use try, catch to catch the IndexOutOfBoundsException error just incase the person does not enter a int variable
         	//for the account number 
     		try 
     		{
+    			int num = cmd.nextInt();
     	    	//make sure the account number exists and print error message otherwise
     			if(accountList.get(num - 1).name.compareTo(name) == 0)
     			{
@@ -176,9 +178,9 @@ public class Account
     			}
 
     		}
-    		catch(Exception IndexOutOfBoundsException)
+    		catch(Exception IndexOutOfBounds)
     		{
-    			System.out.println("Invalid account numer");
+    			System.out.println("Invalid account number");
     		}
         }        
     	//if there are no accounts at all with that name, let the user know
