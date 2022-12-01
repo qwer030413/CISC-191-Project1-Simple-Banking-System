@@ -1,5 +1,4 @@
 
-import java.io.IOException;
 import java.util.ArrayList; // import the ArrayList class
 import java.util.Scanner;
 /**
@@ -33,6 +32,7 @@ public class Account
 	 * @param balance for the initial balance of the account
 	 * 
 	 */
+   
 	public Account(String name, int balance)
 	{
 		this.name = name;
@@ -84,6 +84,7 @@ public class Account
     public void createAcc(String name)
     {
     	accountList.add(new Account(name,0));
+    	
     }
     /**
 	 * Purpose: to deposit money in the given account

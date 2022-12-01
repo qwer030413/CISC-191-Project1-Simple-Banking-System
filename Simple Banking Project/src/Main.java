@@ -21,7 +21,7 @@ public class Main
 	{
 		//create SimpleBank object named bank
 		//initialize it with no a blank name and 0 balance
-		SimpleBank bank = new SimpleBank("",0);
+		SimpleBank bank = new SimpleBank("" , 0);
 		//run the bank
 		bank.run();
 	}
